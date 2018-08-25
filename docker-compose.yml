@@ -12,7 +12,7 @@ services:
         MYSQL_PASSWORD: $MYSQL_PASSWORD
         MYSQL_ROOT_PASSWORD: "root"
     ports:
-      - 3306:3306
+      - 7000:3306
     volumes:
       - "./database/:/docker-entrypoint-initdb.d"
   phpmyadmin:
@@ -35,4 +35,5 @@ services:
       - "./www/:/www/"
     ports:
       - 8888:8888
-
+    environment:
+      - PYTHONUNBUFFERED=0

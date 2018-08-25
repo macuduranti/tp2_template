@@ -27,7 +27,7 @@ $("home-button").click(function() {
     stop_get_sample();
 });
 
-$("#intervalue")[0].addEventListener('input', updateInterval)
+$("#intervalue").addEventListener('input', updateInterval)
 
 function updateInterval(){
     interval = $("#intervalue").val() * 1000;

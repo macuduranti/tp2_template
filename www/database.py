@@ -39,8 +39,9 @@ class Database(object):
         session = self.get_session()
         sample = session.query(Samples).order_by(Samples.id.desc()).first()
         session.close()
-        return sample.serialize()
-        
+        if (sample):
+            return sample.serialize()
+
 
     # def post_sample(self, dict_sample):
     #     """Generate the sample in the database

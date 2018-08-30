@@ -6,6 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+# Definicion del modelo de muestra
 class Samples(Base):
 	__tablename__ = 'samples'
 	id=Column(Integer, primary_key=True)

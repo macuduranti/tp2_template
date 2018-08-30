@@ -12,7 +12,6 @@ class Process(object):
     Returns:
         [int] -- Return the pid (process id) if the process start correctly / None if there is a process started before
     """
-
     def start_process(self):
         if self.process == None:
             cmd = "python process.py"
@@ -20,13 +19,14 @@ class Process(object):
             return self.process.pid
         return None
     
+
     """stop_process: kill the process if there is a process executed
     """
-
     def stop_process(self):
         if self.process != None:
             os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
             self.process = None
 
+    # Método que devuelve el estado del proceso
     def is_running(self):
         return self.process != None

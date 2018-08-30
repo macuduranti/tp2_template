@@ -5,7 +5,7 @@ from database import Database
 import signal
 
 
-
+# Método para parar correctamente el proceso
 class GracefulKiller:
 	kill_now = False
 	def __init__(self):
@@ -15,19 +15,21 @@ class GracefulKiller:
 	def exit_gracefully(self, signum, frame):
 		self.kill_now = True
 
+
+# Main del proceso
 def main(session):
 	killer = GracefulKiller()
 	while (True):
-		temperature = random.randint(-30,40)
+		temperature = random.randint(-30,40) # Crea valores aleatorios
 		humidity = random.randint(0,101)
 		pressure = random.randint(1011,1014)
 		windspeed = random.randint(0,200)
-
+		# Crea una muestra a partir de ellos
 		sample = Samples(temperature=temperature,humidity=humidity,pressure=pressure,windspeed=windspeed)
 		session.add(sample)
-		session.commit()
+		session.commit() # Persiste en la db
 
-		sleep(1)
+		sleep(1) # Delay de un segundo
 		if killer.kill_now:
 			session.close()
 			break

@@ -30,28 +30,16 @@ class Database(object):
         return self.session
 
     def get_10samples(self):
+        # Método que devuelve las últimas muestras, con un máximo de 10  
         session = self.get_session()
         samples = session.query(Samples).order_by(Samples.id.desc()).limit(10).all()
         session.close()
         return [s.serialize() for s in samples]
 
     def get_lastsample(self):
+        # Método que devuelve la última muestra
         session = self.get_session()
         sample = session.query(Samples).order_by(Samples.id.desc()).first()
         session.close()
         if (sample):
             return sample.serialize()
-
-
-    # def post_sample(self, dict_sample):
-    #     """Generate the sample in the database
-    
-    #     Returns:
-    #         [id of sample] -- [generate the sample]
-    #     """
-    #     session = self.get_session()
-    #     sample = Samples(temperature=dict_sample["temperature"],humidity=dict_sample["humidity"],pressure=dict_sample["pressure"],windspeed=dict_sample["windspeed"])
-    #     session.add(sample)
-    #     session.commit()
-    #     session.close()     
-    #     return sample_id

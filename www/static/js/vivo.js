@@ -19,11 +19,13 @@ function stop_get_sample() {
 // Función sample, se define que se ejecuta cada 'interval' milisegundos
 function sample() {
     $.get("/last-sample/", function(data) { // Hace un get en la ruta definida en app.py
-        $("#sid").text(data.id);            // Actualiza cada dato en el html
-        $("#st").text(data.temperature);
-        $("#sp").text(data.pressure);
-        $("#sh").text(data.humidity);
-        $("#sw").text(data.windspeed);
+        if (data != null) {
+            $("#sid").text(data.id);            // Actualiza cada dato en el html
+            $("#st").text(data.temperature);
+            $("#sp").text(data.pressure);
+            $("#sh").text(data.humidity);
+            $("#sw").text(data.windspeed);
+        }
     });
 }
 

@@ -22,15 +22,15 @@ if __name__ == "__main__":
 # Ruta ultima muestra estatica
 @app.route('/ultima/')
 def ultima():
-	sample = db.get_lastsample() # Ejecuta metodo get, devolviendo la ultima muestra
-	return render_template('ultima.html',sample = sample) # Envía la muestra al html
+	sample = db.get_samples(1) # Ejecuta metodo get, devolviendo la ultima muestra
+	return render_template('ultima.html',sample = sample[0]) # Envía la muestra al html
 
 # Ruta ultima muestra en vivo
 # A diferencia de la anterior, utiliza vivo.js para actualizar la vista
 @app.route('/vivo/')
 def vivo():
-	sample = db.get_lastsample() # Ejecuta metodo get, devolviendo la ultima muestra
-	return render_template('vivo.html',sample = sample) # Envía la muestra al html
+	sample = db.get_samples(1) # Ejecuta metodo get, devolviendo la ultima muestra
+	return render_template('vivo.html',sample = sample[0]) # Envía la muestra al html
 
 # Ruta promedios
 @app.route('/promedios/')
@@ -39,7 +39,7 @@ def promedios():
 	hprom = 0
 	pprom = 0
 	wprom = 0
-	samples = db.get_10samples() # Ejecuta metodo get, devolviendo las ultimas 10 muestras
+	samples = db.get_samples(10) # Ejecuta metodo get, devolviendo las ultimas 10 muestras
 	length = len(samples) 
 	if (length > 0): # Si se devolvieron muestras
 		for s in samples: # Acumula en cada variable
@@ -68,6 +68,6 @@ def toggle_process():
 # Ruta para obtener la ultima muestra como json, para su uso en vivo.js
 @app.route('/last-sample/', methods = ["GET"])
 def get_last_sample():
-    sample = db.get_lastsample() # Ejecuta metodo get, devolviendo la ultima muestra
-    return jsonify(sample)  # Convierte la ultima muestra json
+    sample = db.get_samples(1) # Ejecuta metodo get, devolviendo la ultima muestra
+    return jsonify(sample[0])  # Convierte la ultima muestra json
 

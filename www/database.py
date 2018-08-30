@@ -29,17 +29,9 @@ class Database(object):
             self.Base.metadata.create_all(engine)
         return self.session
 
-    def get_10samples(self):
+    def get_samples(self, cant):
         # Método que devuelve las últimas muestras, con un máximo de 10  
         session = self.get_session()
-        samples = session.query(Samples).order_by(Samples.id.desc()).limit(10).all()
+        samples = session.query(Samples).order_by(Samples.id.desc()).limit(cant).all()
         session.close()
         return [s.serialize() for s in samples]
-
-    def get_lastsample(self):
-        # Método que devuelve la última muestra
-        session = self.get_session()
-        sample = session.query(Samples).order_by(Samples.id.desc()).first()
-        session.close()
-        if (sample):
-            return sample.serialize()

@@ -2,7 +2,6 @@
 from flask import Flask
 from flask import render_template
 from flask import jsonify
-from flask import redirect
 from database import Database
 from aux_pro import Process
 
@@ -56,7 +55,7 @@ def toggle_process():
 		pro.stop_process()
 	else:
 		pro.start_process()
-	return redirect("/")
+	return index()
 
 @app.route('/last-sample/', methods = ["GET"])
 def get_last_sample():

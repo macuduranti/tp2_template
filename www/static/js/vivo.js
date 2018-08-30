@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 var control_sample;
-var interval = 2000;
+var interval = 1000;
 
 function start_get_sample() {
     control_sample = setInterval(sample, interval);
